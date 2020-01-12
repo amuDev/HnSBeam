@@ -156,9 +156,9 @@ public Action Beam_Main(int client) {
 	menu.AddItem("1", szBuffer, g_bBeam[client] ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
 
 	FormatEx(szBuffer, 128, "Air Follow %s", g_bAirFollow[client] ? "[ENABLED]" : "[DISABLED]");
-	menu.AddItem("2", "Air Follow %s", g_bBeam[client] ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
+	menu.AddItem("2", "Air Follow", g_bBeam[client] ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
 
-	FormatEx(szBuffer, 128, "Ground Follow %s", g_bAirFollow[client] ? "[ENABLED]" : "[DISABLED]");
+	FormatEx(szBuffer, 128, "Ground Follow %s", g_bGroundFollow[client] ? "[ENABLED]" : "[DISABLED]");
 	menu.AddItem("3", "Ground Follow", g_bBeam[client] ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
 
 	menu.AddItem("4", "Beam Color", g_bBeam[client] ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
@@ -176,45 +176,49 @@ public int BeamMenuHandler(Menu menu, MenuAction action, int client, int select)
 		delete menu;
 	else if(action == MenuAction_Select) {
 		switch(select) {
-			case 1: {
+			case 0: {
 				g_bBeam[client] = !g_bBeam[client];
 
-				PrintToChat(client, "%s Beam has been \x04%s\x01.", PREFIX, g_bBeam[client] ? "enabled" : "disabled");
+				PrintToChat(client, "%s Beam has been %s\x01.", PREFIX, g_bBeam[client] ? "\x04enabled" : "\x02disabled");
 
 				char sCookie[2];
 				IntToString(g_bBeam[client], sCookie, sizeof(sCookie));
 				SetClientCookie(client, g_hBeamCookie, sCookie);
+				Beam_Main(client);
 			}
-			case 2: {
+			case 1: {
 				g_bShowDucks[client] = !g_bShowDucks[client];
 
-				PrintToChat(client, "%s Show ducks has been \x04%s\x01.", PREFIX, g_bShowDucks[client] ? "enabled" : "disabled");
+				PrintToChat(client, "%s Show ducks has been %s\x01.", PREFIX, g_bShowDucks[client] ? "\x04enabled" : "\x02disabled");
 
 				char sCookie[2];
 				IntToString(g_bShowDucks[client], sCookie, sizeof(sCookie));
 				SetClientCookie(client, g_hShowDucksCookie, sCookie);
+				Beam_Main(client);
 			}
-			case 3: {
+			case 2: {
 				g_bAirFollow[client] = !g_bAirFollow[client];
 
-				PrintToChat(client, "%s Air follow has been \x04%s\x01.", PREFIX, g_bAirFollow[client] ? "enabled" : "disabled");
+				PrintToChat(client, "%s Air follow has been %s\x01.", PREFIX, g_bAirFollow[client] ? "\x04enabled" : "\x02disabled");
 
 				char sCookie[2];
 				IntToString(g_bAirFollow[client], sCookie, sizeof(sCookie));
 				SetClientCookie(client, g_hAirFollowCookie, sCookie);
+				Beam_Main(client);
 			}
-			case 4: {
+			case 3: {
 				g_bGroundFollow[client] = !g_bGroundFollow[client];
 
-				PrintToChat(client, "%s Ground follow has been \x04%s\x01.", PREFIX, g_bGroundFollow[client] ? "enabled" : "disabled");
+				PrintToChat(client, "%s Ground follow has been %s\x01.", PREFIX, g_bGroundFollow[client] ? "\x04enabled" : "\x02disabled");
 
 				char sCookie[2];
 				IntToString(g_bGroundFollow[client], sCookie, sizeof(sCookie));
 				SetClientCookie(client, g_hGroundFollowCookie, sCookie);
+				Beam_Main(client);
 			}
-			case 5:
+			case 4:
 				StandingColors(client);
-			case 6:
+			case 5:
 				DuckingColors(client);
 		}
 	}
