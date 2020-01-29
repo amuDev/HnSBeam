@@ -156,10 +156,10 @@ public Action Beam_Main(int client) {
 	menu.AddItem("1", szBuffer, g_bBeam[client] ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
 
 	FormatEx(szBuffer, 128, "Air Follow %s", g_bAirFollow[client] ? "[ENABLED]" : "[DISABLED]");
-	menu.AddItem("2", "Air Follow", g_bBeam[client] ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
+	menu.AddItem("2", szBuffer, g_bBeam[client] ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
 
 	FormatEx(szBuffer, 128, "Ground Follow %s", g_bGroundFollow[client] ? "[ENABLED]" : "[DISABLED]");
-	menu.AddItem("3", "Ground Follow", g_bBeam[client] ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
+	menu.AddItem("3", szBuffer, g_bBeam[client] ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
 
 	menu.AddItem("4", "Beam Color", g_bBeam[client] ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
 
